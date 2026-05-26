@@ -1,54 +1,116 @@
+# Sistem Gudang
 
-# Sistem Web Sederhana
+Aplikasi web manajemen inventaris gudang sederhana built dengan Node.js, Express, dan SQLite.
 
-Stack: Node.js + Express + SQLite
+## Fitur utama
 
-Aplikasi: Warehouse inventory sederhana dengan field nama, SKU, kuantitas, dan lokasi.
+- CRUD inventaris barang (Create, Read, Update, Delete)
+- Pencarian dan penyaringan barang berdasarkan nama, SKU, lokasi, kategori, dan supplier
+- Sorting dan pagination daftar barang
+- Statistik ringkas: total item, stok total, stok rendah, jumlah supplier
+- Export data ke CSV sesuai filter saat ini
+- Dashboard stok dengan visualisasi 5 barang teratas berdasarkan kuantitas
+- Dukungan migrasi DB dan seed data contoh
+- Testing otomatis dengan Jest + Supertest
+- Workflow CI GitHub Actions untuk menjalankan test pada push dan pull request
 
-Setup lokal:
+## Teknologi
+
+- Node.js
+- Express
+- SQLite
+- Vanilla JavaScript
+- Tailwind CSS (via CDN)
+- Jest
+- Supertest
+- GitHub Actions
+
+## Cara menjalankan
+
+1. Clone repository:
 
 ```powershell
-cd Sample
+git clone https://github.com/kamaludinfirmansyah642-rgb/Sistem-Gudang.git
+cd Sistem-Gudang
+```
+
+2. Install dependensi:
+
+```powershell
 npm install
+```
+
+3. Jalankan migrasi database (opsional):
+
+```powershell
+npm run migrate
+```
+
+4. Seed data contoh (opsional):
+
+```powershell
+npm run seed
+```
+
+5. Jalankan server:
+
+```powershell
 npm start
 ```
 
-Lalu buka http://localhost:3000
+6. Buka browser:
 
-Test otomatis (lokal):
+```text
+http://localhost:3000
+```
+
+## Testing
+
+Jalankan test unit dan integrasi dengan:
 
 ```powershell
-cd Sample
 npm test
 ```
 
-CI: repository sudah menyertakan GitHub Actions workflow di `.github/workflows/ci.yml` yang menjalankan `npm test` pada push dan pull request (menggunakan `DB_PATH=':memory:'` dan `NODE_ENV=test`).
+## Struktur proyek
 
-Migrasi database:
+- `server.js` — backend Express + API endpoint
+- `public/` — frontend static assets
+- `public/index.html` — antarmuka aplikasi
+- `public/app.js` — logika client-side
+- `public/style.css` — styling tambahan
+- `scripts/migrate.js` — migrasi database otomatis
+- `scripts/seed.js` — seed data inventaris contoh
+- `migrations/` — file SQL migrasi
+- `tests/` — test API
+- `.github/workflows/ci.yml` — GitHub Actions workflow
 
-1. Letakkan file SQL migrasi di folder `migrations/` dengan nama berformat `NNN_description.sql`.
-2. Jalankan migrasi:
+## Deployment
 
-```powershell
-cd Sample
-npm run migrate
-# atau gunakan DB_PATH custom: DB_PATH=./prod.db npm run migrate
-```
+Aplikasi ini siap untuk di-deploy pada platform hosting Node.js yang mendukung SQLite, contohnya Render atau Railway.
 
-Skrip migrasi mencatat file yang sudah dijalankan di tabel `migrations` sehingga tidak akan dijalankan ulang.
+Saran deployment:
 
-Seed data contoh:
+- Pastikan file `data.db` dapat ditulis oleh environment deployment
+- Atur `DB_PATH` jika database perlu disimpan di lokasi tertentu
 
-```powershell
-cd Sample
-npm run seed
-# untuk mengosongkan tabel terlebih dulu: SEED_FORCE=1 npm run seed
-```
+## Catatan untuk portofolio
 
-Script `scripts/seed.js` menambahkan 10 item contoh ke tabel `items` dengan kategori dan supplier.
+Proyek ini menunjukkan kemampuan dalam:
 
-Export CSV:
+- membangun full-stack web app sederhana
+- mendesain UI modern dengan Tailwind CSS
+- membuat API RESTful dan database SQLite
+- menulis test otomatis dan mengonfigurasi CI
+- membuat dokumentasi dan pipeline deployment
 
-- Gunakan tombol `Export CSV` di halaman untuk mengunduh seluruh data yang sesuai filter saat ini.
+## Kontak
+
+Jika ingin mengembangkan fitur lebih lanjut, tambahkan:
+
+- login / autentikasi admin
+- import data CSV / XLSX
+- analytics stok dan nilai persediaan
+- notifikasi stok rendah otomatis
 
 
